@@ -1,6 +1,6 @@
 # GRAV Base #
 
-Base docker image for running GRAV
+Base docker image for running GRAV + Admin
 
 ### Contents ###
 
@@ -37,19 +37,23 @@ PHP-FPM pool : `/etc/php7/php-fpm.d/zz-custom.conf`
 PHP : `/etc/php7/conf.d/zz-custom.ini`
 Supervisord : `/etc/supervisor/conf.d/supervisord.conf`
 
-Nginx root is set as `/var/www/html/public/`.
+Nginx root is set as `/var/www/grav-admin/`.
 
 #### Getting content into container ####
 
-Content can be copied or mounted into container with `var/www/html` as its base :
+Content can be copied or mounted into container with `var/www/grav-admin` as its base :
 
 copied through Dockefile
 
-    FROM aerlaut/laravel-base
-    COPY . /var/www/html
+    FROM aerlaut/grav-base
+    COPY . /var/www/grav-admin
 
 or mounted
 
-    docker run -v <src>:/var/www/html -p 80:80 aerlaut/laravel-base
+    docker run -v <src>/user:/var/www/grav-admin/user -p 80:80 aerlaut/grav-base
 
 Nginx and PHP-FPM are set to run as `root:dev`. The group `dev` has ID `1024`. Folder on host can be mounted with group `1024` to enable editing from both the container and the host.
+
+#### Accessing admin panel ####
+
+Admin panel can be accessed from `localhost/admin`.
