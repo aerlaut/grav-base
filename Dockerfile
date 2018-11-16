@@ -35,7 +35,8 @@ RUN apk --no-cache add php7 \
     php7-memcached \
     nginx \
     supervisor \
-    curl
+    curl \
+    git
 
 # Installing Grav
 RUN mkdir /var/www/html && \
